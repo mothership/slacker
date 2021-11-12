@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"regexp"
 
 	"github.com/shomali11/commander"
 	"github.com/shomali11/proper"
@@ -31,6 +32,8 @@ const (
 
 var (
 	errUnauthorized = errors.New("you are not authorized to execute this command")
+	removeUserRegex = regexp.MustCompile(`^(\s+)?(<@U.*>)(.+)$`)
+	replaceUserStr  = "${1}${3}"
 )
 
 // NewClient creates a new client using the Slack API
@@ -370,7 +373,7 @@ func newMessageEvent(evt interface{}) *MessageEvent {
 		me = &MessageEvent{
 			Channel:         ev.Channel,
 			User:            ev.User,
-			Text:            ev.Text,
+			Text:            removeUserRegex.ReplaceAllString(ev.Text, replaceUserStr),
 			Data:            evt,
 			Type:            ev.Type,
 			TimeStamp:       ev.TimeStamp,
