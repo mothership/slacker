@@ -9,3 +9,5 @@ require (
 	github.com/slack-go/slack v0.9.1
 	github.com/stretchr/testify v1.3.0 // indirect
 )
+
+replace github.com/shomali11/commander => github.com/mothership/commander v0.0.0-20211112201510-4a0f4ef371b8

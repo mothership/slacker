@@ -14,8 +14,8 @@ type CommandDefinition struct {
 }
 
 // NewBotCommand creates a new bot command object
-func NewBotCommand(usage string, definition *CommandDefinition) BotCommand {
-	command := commander.NewCommand(usage)
+func NewBotCommand(usage string, definition *CommandDefinition, opts ...commander.Option) BotCommand {
+	command := commander.NewCommand(usage, opts...)
 	return &botCommand{
 		usage:      usage,
 		definition: definition,

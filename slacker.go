@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/shomali11/commander"
 	"github.com/shomali11/proper"
 	"github.com/slack-go/slack"
 	"github.com/slack-go/slack/slackevents"
@@ -273,7 +274,7 @@ func (s *Slacker) prependHelpHandle() {
 		s.helpDefinition.Description = helpCommand
 	}
 
-	s.botCommands = append([]BotCommand{NewBotCommand(helpCommand, s.helpDefinition)}, s.botCommands...)
+	s.botCommands = append([]BotCommand{NewBotCommand(helpCommand, s.helpDefinition, commander.WithExactMatch(true))}, s.botCommands...)
 }
 
 func (s *Slacker) handleMessageEvent(ctx context.Context, evt interface{}) {
