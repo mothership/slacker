@@ -324,8 +324,6 @@ func (s *Slacker) handleMessageEvent(ctx context.Context, evt interface{}) {
 
 	botCtx := s.botContextConstructor(ctx, s.client, s.socketModeClient, ev)
 	response := s.responseConstructor(botCtx)
-	fmt.Printf("Got: %q", ev.Text)
-
 	for _, cmd := range s.botCommands {
 		parameters, isMatch := cmd.Match(ev.Text)
 		if !isMatch {
